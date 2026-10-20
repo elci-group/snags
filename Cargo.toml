@@ -1,0 +1,29 @@
+[package]
+name = "snags"
+version = "0.1.0"
+edition = "2021"
+authors = ["Elci Group"]
+description = "Padagonia-backed issues-encountered index: record snags with traces and logs, report what's outstanding"
+license = "MIT"
+repository = "https://github.com/elci-group/snags"
+rust-version = "1.85"
+
+[[bin]]
+name = "snags"
+path = "src/main.rs"
+
+[dependencies]
+clap = { version = "4.5", features = ["derive"] }
+anyhow = "1"
+comfy-table = "7.1"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+# Local sibling checkout. Once padagonia is published to crates.io, switch to
+# `padagonia = "x.y"`; until then this tracks the working copy at ../padagonia.
+padagonia = { path = "../padagonia" }
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1
+strip = true
